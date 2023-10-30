@@ -60,7 +60,7 @@ import sys
 #     destination = 'Dowa'
 #     fun(graph , source , destination)
 
-
+#  ------------------------------------ final class based implementation -------------------------
 class Graph:
 
     # G(V,E) v for vertex and E for edge
@@ -86,6 +86,7 @@ class ShortestPathAvailable:
     def __init__(self, graph):
         self.graph = graph
 
+    # method to calculate the shortest path
     def shortest_path(self, src, dest):
         # for unvisited and unknown V's thats infinity 
         inf = sys.maxsize
@@ -145,7 +146,7 @@ if __name__ == '__main__':
     # connection of to and from weights is taken care by add_edge
     my_graph.add_edge('Mchinji', 'Kasungu', 141)
     my_graph.add_edge('Mchinji', 'Lilongwe', 109)
-    my_graph.add_edge('kasungu', 'Dowa', 117)
+    my_graph.add_edge('Kasungu', 'Dowa', 117)
     my_graph.add_edge('Kasungu', 'Ntchisi', 66)
     my_graph.add_edge('Dowa', 'Ntchisi',38)
     my_graph.add_edge('Dowa', 'Salima', 67)
@@ -154,15 +155,43 @@ if __name__ == '__main__':
     my_graph.add_edge('Ntchisi', 'Nkhotakota', 66)
     my_graph.add_edge('Nkhotakota', 'Salima', 112)
     my_graph.add_edge('Salima', 'Dedza', 96)
-    my_graph.add_edge('Dedza', 'Ntcheu', 74)
-   
+    my_graph.add_edge( 'Dedza','Ntcheu', 74)   
 
     shortest_path_finder = ShortestPathAvailable(my_graph)
-    source_node = 'Mchinji'
-    dest_node = 'Nkhotakota'
 
+
+    # --------------------------------------tests cases-------------------------------------
+    # 
+    #  # Test Case 1: Find the shortest path from Mchinji to Salima
+    source_node = 'Mchinji'
+    dest_node = 'Salima'
     shortest_cost, path = shortest_path_finder.shortest_path(source_node, dest_node)
-    print(f"Shortest Cost: {shortest_cost}")
-    print(f"Shortest Path: {path}")
+    assert shortest_cost == 231
+    assert path == ['Mchinji', 'Lilongwe', 'Dowa' , 'Salima']  
+    print(f"path_cost: {shortest_cost}")
+    print(f"Shortest Path districts: {path}")
+
+    # Test Case 2: Find the shortest path from Mchinji to Ntcheu
+    source_node = 'Mchinji'
+    dest_node = 'Ntcheu'
+    shortest_cost, path = shortest_path_finder.shortest_path(source_node, dest_node)
+    assert shortest_cost == 275
+    assert path ==  ['Mchinji', 'Lilongwe', 'Dedza', 'Ntcheu']
+    print(f"path_cost: {shortest_cost}")
+    print(f"Shortest Path districts: {path}")
+
+    # Test Case 3: Find the shortest path from Dowa to Dedza
+    source_node = 'Dowa'
+    dest_node = 'Dedza'
+    shortest_cost, path = shortest_path_finder.shortest_path(source_node, dest_node)
+    assert shortest_cost == 147
+    assert path ==   ['Dowa', 'Lilongwe', 'Dedza']
+    print(f"path_cost: {shortest_cost}")
+    print(f"Shortest Path districts: {path}")
+
+ 
+    print('All tests succeeded! I hope it works on your machine as well','😥'.encode('utf-8'))
+
+    
 
 
